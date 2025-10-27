@@ -246,6 +246,7 @@ program yspec
 
   ! set the attenuation 
   call set_ats_switch(ats_in) 
+  write(6,*) 'ep = ', ep
 
 
   ! start loop over l

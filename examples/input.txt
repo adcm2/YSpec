@@ -8,46 +8,46 @@
   prem.200
 
 # attenuation switch: 1 = on, 0 = off
-1
+0
 
 # gravitation: 0 = none, 1 = cowling, 2 = self
 2
 
 # output: 0 = displacement, 1 = velocity, 2 = acceleration
-1
+2
 
 # potential and tilt corrections: 0 = no, 1 = yes 
-1
+0
  
 # lmin 
   1
 
 # lmax
-  5
+  1
 
 # fmin (mHz) (this should always be greater than 0)
   0.2
 
 # fmax (mHz)
-  40
+  5.0
   
 #  length of  time series (min)
-  60
+  3000
 
 # time step (sec) 
   1.0	
 
 # f11 filter (mHz) 
-  1.0
+  0.2
 
 # f12 filter (mHz) 
-  5.0
+  0.22
 
 # f21 filter (mHz) 
-  38
+  4.98
 
 # f22 filter (mHz) 
-  40
+  5.0
 
 # source depth (km)
   29.5
@@ -80,9 +80,10 @@
   3
 
 # number of receivers
-1
+2
 
 # receiver latitudes and longitudes
  
      0    04
+     0    06
      
