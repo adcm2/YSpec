@@ -36,6 +36,7 @@ program yspec
   !================================================================!  
   character(len=10) :: string                                      !
   character(len=256) :: pref_out                                   !
+  character(len=256) :: pref_w_out                                 !
   character(len=256) :: seis_out                                   !
   character(len=256) :: phi_coef_pref ='phi_coef.out'              !
   character(len=256) :: phi_coef_out                               !
@@ -426,6 +427,35 @@ program yspec
   ! end loop over l
 
 
+  !-------------------------------------------!
+  !       write out spectra to file           !
+  !-------------------------------------------!
+
+!   nout = nt
+!   do i = 1,nt
+!      t = (i-1)*dt
+!      if(t > tout) then
+!         nout = i
+!         exit
+!      end if
+!   end do
+   pref_w_out = trim(pref_out)//'_spectra'
+   do k = 1,nr
+
+     call string_cat_int(trim(pref_w_out)//'.',k,seis_out)
+     open(io3,file=trim(seis_out),form='formatted')
+
+     do i=1,nw
+         w=wmin+(i-1)*dw
+         w = w * 1000.0/(t_norm * twopi_d)
+         write(io3,110) real(w),real(ur(i,k)),aimag(ur(i,k)), & 
+             real(ut(i,k)),aimag(ut(i,k)), & 
+             real(up(i,k)),aimag(up(i,k))
+     end do
+     close(io3)
+
+   end do
+
   !------------------------------------------!
   !   perform inverse Fourier transform      !
   !------------------------------------------!
@@ -501,6 +531,7 @@ program yspec
   end do
   
 100 format(5e15.6)
+110 format(7e15.6)
   
   !-----------------------------------------!
   !         deallocate the model            !
