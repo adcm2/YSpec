@@ -381,10 +381,9 @@ module module_fourier
     df = ep/(twopi_d*qex)
     
     nt = 1.0_sp/(df*dt)
-    
     ne = log(real(nt))/log(2.0_sp)+1
-    nt = 2**ne
     
+    nt = 2**ne
     df = 1.0_sp/(nt*dt)
     
     i1 = max(floor(f1/df),2)

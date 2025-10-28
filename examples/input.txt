@@ -32,7 +32,7 @@
   5.0
   
 #  length of  time series (min)
-  3000
+  12000
 
 # time step (sec) 
   1.0	

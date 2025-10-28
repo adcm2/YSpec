@@ -191,7 +191,7 @@ program yspec
 
   ! set parameters for frequency spacing
   mex = 5
-  qex = 1
+  qex = 4
 
   ! get the frequency spacing
   call fcal(f1,f2,dt,tout,mex,qex,df,ep,nt,i1,i2)
@@ -463,6 +463,7 @@ program yspec
   call ifft(nt,i1,i2,df,f11,f12,f21,f22,dt,ur,ut,up)
   nt = size(ur,1)
   
+
   !--------------------------------------------!
   ! undo the eponential decay and unnormalize  !
   ! the time-series                            !
