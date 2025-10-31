@@ -20,10 +20,10 @@
 0
  
 # lmin 
-  1
+  2
 
 # lmax
-  1
+  2
 
 # fmin (mHz) (this should always be greater than 0)
   0.2
@@ -59,22 +59,22 @@
   35.58
 
 # M_	{r,r} (Nm) 
-  4.22e17
+  4.22e22
 
 # M_{r,theta} (Nm)
-  3.08e17
+  3.08e22
 
 # M_{r,phi} (Nm)
-  6.99e17
+  6.99e22
 
 # M_{theta,theta} (Nm)
- -2.976e18
+ -2.976e23
 
 # M_{theta,phi} (Nm)
-  6.54e17
+  6.54e22
 
 # M_{phi,phi} (Nm)
-  2.55e18
+  2.55e23
 
 # receiver depth
   0
