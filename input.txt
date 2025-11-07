@@ -2,10 +2,10 @@
 # program yspec
 
 # prefix for output files
-  yspec.out
+  "./output/yspec.out"
 
 # Earth model
-  prem.200.no
+  "./examples/prem.200.no"
 
 # attenuation switch: 1 = on, 0 = off
 0
@@ -20,7 +20,7 @@
 0
  
 # lmin 
-  1
+  2
 
 # lmax
   2
