@@ -6,6 +6,10 @@ program yspec
   ! Al-Attar & Woodhouse (2008).                                   !
   !================================================================!
 
+! CURRENT CHANGES:
+! added spectra output
+! switched off radial and spheroidal modes
+
   !================================================================!
   ! Modules used:                                                  !
   !================================================================!
@@ -146,6 +150,7 @@ program yspec
   if(lats == 90.0_dp) lats = 89.98_dp
   do i = 1,nr
      call delaz(latr(i),lonr(i),lats,lons,delta(i),azep(i),azst(i)) 
+   !   call angles(lats,lons,latr(i),lonr(i),delta(i),azep(i),azst(i))
   end do
   azep = twopi_d-azep
   azst = pi_d-azst
@@ -267,7 +272,7 @@ program yspec
            !-----------------------------------------!
            !               radial modes              !
            !-----------------------------------------!
-           
+           ! RADIAL MODES SWITCHED OFF HERE!
            !get the radial source vector
            call source_vector_rad(w,is,rs,mm,sr0)
 
@@ -291,7 +296,7 @@ program yspec
 
            ! sum the spherical harmonic series
            do k = 1,nr
-              ur(j,k) = ur(j,k) + uu(3)*xa(1,1,k)              
+            !   ur(j,k) = ur(j,k) + uu(3)*xa(1,1,k)              
            end do
 
         else               
@@ -341,7 +346,7 @@ program yspec
            !------------------------------!
            !        spheroidal modes      !
            !------------------------------!
-           
+         !    Spheroidal MODES SWITCHED OFF HERE!
            ! get the spheroidal source vectors
            call source_vector_sph(l,w,is,rs,mm,svs)
 
@@ -502,6 +507,10 @@ program yspec
         ut(i,j) = -tmp1*cos(azep(j))+tmp2*sin(azep(j))
         up(i,j) =  tmp1*sin(azep(j))+tmp2*cos(azep(j))
      end do
+  end do
+  do j = 1,nr
+     print *, ' Receiver ', j, ' at (lat,lon) = (', & 
+          latr(j),',',lonr(j),')', ' azep = ', azep(j), ' azst = ', azst(j)
   end do
 
   !-------------------------------------------!

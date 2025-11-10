@@ -20,10 +20,10 @@
 0
  
 # lmin 
-  2
+  1
 
 # lmax
-  2
+  1
 
 # fmin (mHz) (this should always be greater than 0)
   0.2
@@ -53,10 +53,10 @@
   29.5
 
 # source latitude (deg)
-  90
+  36.87
 
 # source longitude (deg)
-  180
+  35.58
 
 # M_	{r,r} (Nm) 
   4.22e17
@@ -77,13 +77,13 @@
   2.55e18
 
 # receiver depth
-  0
+  0.0
 
 # number of receivers
 2
 
 # receiver latitudes and longitudes
  
-     0    00
+     0    04
      0    06
      
