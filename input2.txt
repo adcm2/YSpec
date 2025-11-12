@@ -53,10 +53,10 @@
   33.0
 
 # source latitude (deg)
-  25.39
+  0
 
 # source longitude (deg)
-  101.40
+  0
 
 # M_	{r,r} (Nm) 
   -0.6e17
@@ -84,6 +84,6 @@
 
 # receiver latitudes and longitudes
  
-     51.6807   103.6438
+     0   45
      0    06
      

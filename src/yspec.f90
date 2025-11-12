@@ -336,8 +336,8 @@ program yspec
                        xc = msign*xca(l+1,abs(m)+1,k)
                     end if
                     ei = eia(k)**m                 
-                  !   ut(j,k) = ut(j,k) + ii*m*ww(m+3)*x*ei              
-                  !   up(j,k) = up(j,k) - ww(m+3)*xp*ei
+                    ut(j,k) = ut(j,k) + ii*m*ww(m+3)*x*ei              
+                    up(j,k) = up(j,k) - ww(m+3)*xp*ei
                  end do
               end do
               
@@ -419,9 +419,9 @@ program yspec
                     xc = msign*xca(l+1,abs(m)+1,k)
                  end if
                  ei = eia(k)**m                            
-                 ur(j,k)  = ur(j,k)  + uu(m+3)*x*ei
-                 ut(j,k)  = ut(j,k)  + vv(m+3)*xp*ei              
-                 up(j,k)  = up(j,k)  + ii*m*vv(m+3)*xc*ei                     
+               !   ur(j,k)  = ur(j,k)  + uu(m+3)*x*ei
+               !   ut(j,k)  = ut(j,k)  + vv(m+3)*xp*ei              
+               !   up(j,k)  = up(j,k)  + ii*m*vv(m+3)*xc*ei                     
               end do
            end do           
 
