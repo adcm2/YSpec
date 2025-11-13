@@ -23,7 +23,7 @@
   1
 
 # lmax
-  2
+  1
 
 # fmin (mHz) (this should always be greater than 0)
   0.2
