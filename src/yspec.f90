@@ -48,7 +48,8 @@ program yspec
   integer(i4b) :: i,j,k,l,lmin,lmax, &                             !
        nw,ios,i1,i2,is,ir,nt,nr,nout,mex, &                        !
        qex,m,im,isv,msign,ats_in,grav_switch, &                    !
-       out_switch,cor_switch,phi_coef_switch                       !
+       out_switch,cor_switch,phi_coef_switch, &                   !
+       mtype                                                       !
   real(dp) :: wmin,wmax,dw,rr,rs,ep,lons,lats, &                   !
        zeta,wt,dt,df,t,f11,f12,f21,f22,f,tout,depth_rec, &         !
        depth_source,sqzm2,sqzm6,sqz,f1,f2,x,xp,xc                  !
@@ -102,6 +103,7 @@ program yspec
 
 
   ! read computational parameters
+  call read_int(io1,mtype,2)
   call read_int(io1,ats_in,2)
   call read_int(io1,grav_switch,2)
   call read_int(io1,out_switch,2)
@@ -267,7 +269,7 @@ program yspec
  
         w=wmin+(j-1)*dw-ii*ep
 
-        if(l == 0) then
+        if((l == 0) .and. ((mtype == 1) .or. (mtype == 4))) then
 
            !-----------------------------------------!
            !               radial modes              !
@@ -296,7 +298,7 @@ program yspec
 
            ! sum the spherical harmonic series
            do k = 1,nr
-            !   ur(j,k) = ur(j,k) + uu(3)*xa(1,1,k)              
+              ur(j,k) = ur(j,k) + uu(3)*xa(1,1,k)              
            end do
 
         else               
@@ -305,7 +307,7 @@ program yspec
            !        toroidal modes          !
            !--------------------------------!
 
-           if(l > 1) then
+           if((l > 1) .and. ((mtype == 2) .or. (mtype == 4))) then
            
               ! get the source vectors
               call source_vector_tor(l,w,is,rs,mm,svt)
@@ -347,6 +349,8 @@ program yspec
            !        spheroidal modes      !
            !------------------------------!
          !    Spheroidal MODES SWITCHED OFF HERE!
+
+         if((mtype == 3) .or. (mtype == 4)) then
            ! get the spheroidal source vectors
            call source_vector_sph(l,w,is,rs,mm,svs)
 
@@ -419,12 +423,12 @@ program yspec
                     xc = msign*xca(l+1,abs(m)+1,k)
                  end if
                  ei = eia(k)**m                            
-               !   ur(j,k)  = ur(j,k)  + uu(m+3)*x*ei
-               !   ut(j,k)  = ut(j,k)  + vv(m+3)*xp*ei              
-               !   up(j,k)  = up(j,k)  + ii*m*vv(m+3)*xc*ei                     
+                 ur(j,k)  = ur(j,k)  + uu(m+3)*x*ei
+                 ut(j,k)  = ut(j,k)  + vv(m+3)*xp*ei              
+                 up(j,k)  = up(j,k)  + ii*m*vv(m+3)*xc*ei                     
               end do
            end do           
-
+         end if
         end if
      end do wloop
      ! end loop over frequency
