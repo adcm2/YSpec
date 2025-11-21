@@ -307,7 +307,7 @@ program yspec
            !        toroidal modes          !
            !--------------------------------!
 
-           if((l > 1) .and. ((mtype == 2) .or. (mtype == 4))) then
+           if(((mtype == 2) .or. (mtype == 4))) then
            
               ! get the source vectors
               call source_vector_tor(l,w,is,rs,mm,svt)
