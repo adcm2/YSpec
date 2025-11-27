@@ -8,7 +8,7 @@
   "./examples/prem_noocean_noattenuation.txt"
 
 # which type of modes to include
-4
+3
 
 # attenuation switch: 1 = on, 0 = off
 0
@@ -23,10 +23,10 @@
 0
  
 # lmin 
-  2
+  0
 
 # lmax
-  2
+  20
 
 # fmin (mHz) (this should always be greater than 0)
   0.1
@@ -35,7 +35,7 @@
   5.0
   
 #  length of  time series (min)
-  500
+  60
 
 # time step (sec) 
   1.0	

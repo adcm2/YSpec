@@ -301,14 +301,12 @@ program yspec
               ur(j,k) = ur(j,k) + uu(3)*xa(1,1,k)              
            end do
 
-        else               
+        else if (l > 0) then     
 
            !--------------------------------!
            !        toroidal modes          !
            !--------------------------------!
-
            if(((mtype == 2) .or. (mtype == 4))) then
-           
               ! get the source vectors
               call source_vector_tor(l,w,is,rs,mm,svt)
               
@@ -342,8 +340,7 @@ program yspec
                     up(j,k) = up(j,k) - ww(m+3)*xp*ei
                  end do
               end do
-              
-           end if
+            end if
 
            !------------------------------!
            !        spheroidal modes      !
@@ -458,9 +455,9 @@ program yspec
      do i=1,nw
          w=wmin+(i-1)*dw
          w = w * 1000.0/(t_norm * twopi_d)
-         write(io3,110) real(w),real(ur(i,k)),aimag(ur(i,k)), & 
-             real(ut(i,k)),aimag(ut(i,k)), & 
-             real(up(i,k)),aimag(up(i,k))
+         write(io3,110) real(w),real(ur(i,k)) * acl_norm,aimag(ur(i,k)) * acl_norm, & 
+             real(ut(i,k)) * acl_norm,aimag(ut(i,k)) * acl_norm, & 
+             real(up(i,k)) * acl_norm,aimag(up(i,k)) * acl_norm
      end do
      close(io3)
 
