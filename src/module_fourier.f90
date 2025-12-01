@@ -67,12 +67,16 @@ module module_fourier
       integer(i4b) :: n,ne,i,j,nr,k
       real(dp) :: w,filt
       complex(dp), dimension(:,:), allocatable :: data
+      character(len=256) :: pref_out                                   !
+      character(len=256) :: pref_w_out                                 !
+      integer(i4b), parameter :: io1=7,io2=8,io3=9                     !
+      character(len=256) :: seis_out                                   !
 
       nr = size(ur,2)
 
       n = nt
 
-
+! print *, 'Frequency filter parameters: ', w1, w2, w3, w4
 
 
       ! copy spectra into temporary array
@@ -115,6 +119,26 @@ module module_fourier
          end do
       end if
 
+      seis_out = './output/yspec.out_spectra_filt.1'
+   do k = 1,nr
+
+   !   call string_cat_int(trim(pref_w_out)//'.',k,seis_out)
+     open(io3,file=trim(seis_out),form='formatted')
+
+     do i=1,n/2+1
+         w=(i-1)*df
+         w = w * 1000.0/(930.06761579615363 )
+         ! if (i == 1) then
+         !    print *, ' idx: ', i, ' freq (mHz): ', w
+         ! else if (i == nw) then
+         !    print *, ' idx: ', i, ' freq (mHz): ', w
+         ! end if
+         write(io3,*) real(w),real(data(1,i)) * 7.3650984991442057,aimag(data(1,i)) * 7.3650984991442057
+     end do
+     close(io3)
+
+   end do
+
 
       ! do the negative frequencies
       j = 0
@@ -141,6 +165,7 @@ module module_fourier
       end do
       deallocate(data)
 
+! 110 format(7e15.6)
       return
     end subroutine ifft
 
@@ -391,6 +416,8 @@ module module_fourier
     
     i2 = floor(f2/df)+2
     f2 = (i2-1)*df
+
+   !  print *, 'Adjusted frequency range to ', f1, ' to ', f2, ' mHz'
 
     return
   end subroutine fcal

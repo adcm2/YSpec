@@ -156,6 +156,19 @@ program yspec
   end do
   azep = twopi_d-azep
   azst = pi_d-azst
+!   print *, 'delta (deg): ', delta*180.0_dp/pi_d
+!   print *, 'azep (deg): ', azep*180.0_dp/pi_d
+!   print *, 'azst (deg): ', azst*180.0_dp/pi_d
+
+!   do i = 1,nr
+!      call delaz(latr(i),lonr(i),lats,lons,delta(i),azep(i),azst(i)) 
+!    !   call angles(lats,lons,latr(i),lonr(i),delta(i),azep(i),azst(i))
+!   end do
+!   azep = twopi_d-azep
+!   azst = pi_d-azst
+!   print *, 'delta (deg): ', delta*180.0_dp/pi_d
+!   print *, 'azep (deg): ', azep*180.0_dp/pi_d
+!   print *, 'azst (deg): ', azst*180.0_dp/pi_d
 
   !--------------------------------------------------!
   !    compute the required spherical harmonics      !
@@ -196,6 +209,7 @@ program yspec
   f21=f21/1000.0_dp*t_norm
   f22=f22/1000.0_dp*t_norm
 
+  print *, 'frequencies: ', f11, f12, f21, f22
   ! set parameters for frequency spacing
   mex = 5
   qex = 4
@@ -206,6 +220,7 @@ program yspec
 
   ! set some more parameters
   dw = twopi_d*df
+  print *, ' frequency step (rad/s) = ', dw* 1000.0/(t_norm * twopi_d)
   if(i1 == i2) stop 'too few frequency steps'  
   wmin=(i1-1)*dw
   wmax=(i2-1)*dw
@@ -455,6 +470,11 @@ program yspec
      do i=1,nw
          w=wmin+(i-1)*dw
          w = w * 1000.0/(t_norm * twopi_d)
+         ! if (i == 1) then
+         !    print *, ' idx: ', i, ' freq (mHz): ', w
+         ! else if (i == nw) then
+         !    print *, ' idx: ', i, ' freq (mHz): ', w
+         ! end if
          write(io3,110) real(w),real(ur(i,k)) * acl_norm,aimag(ur(i,k)) * acl_norm, & 
              real(ut(i,k)) * acl_norm,aimag(ut(i,k)) * acl_norm, & 
              real(up(i,k)) * acl_norm,aimag(up(i,k)) * acl_norm
