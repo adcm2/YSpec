@@ -43,13 +43,14 @@ program yspec
   integer(i4b) :: i,j,k,l,lmin,lmax, &                             !
        nw,ios,i1,i2,is,ir,nt,nr,nout,mex, &                        !
        qex,m,im,isv,msign,ats_in,grav_switch, &                    !
-       out_switch,cor_switch,phi_coef_switch                       !
+       out_switch,cor_switch,phi_coef_switch, m_type               !
   real(dp) :: wmin,wmax,dw,rr,rs,ep,lons,lats, &                   !
        zeta,wt,dt,df,t,f11,f12,f21,f22,f,tout,depth_rec, &         !
        depth_source,sqzm2,sqzm6,sqz,f1,f2,x,xp,xc                  !
   real(dp), dimension(6) :: mm                                     !
   real(dp), dimension(:), allocatable :: latr,lonr,delta, &        !
-       azst,csc,azep                                               !
+       azst,csc,azep, delta1, azst1, azep1, &                      !
+       csc1                                                        !
   real(dp), dimension(:,:), allocatable :: xl0,xlp1,xlp2,xlp3      !
   real(dp), dimension(:,:,:), allocatable :: xa,xpa,xca            !
   complex(dpc) :: w,tmp1,tmp2,ei                                   !
@@ -97,6 +98,7 @@ program yspec
 
 
   ! read computational parameters
+  call read_int(io1,m_type,2)
   call read_int(io1,ats_in,2)
   call read_int(io1,grav_switch,2)
   call read_int(io1,out_switch,2)
@@ -141,13 +143,30 @@ program yspec
   !--------------------------------------------------!
   !     compute epicentral angle and azimuths        !
   !--------------------------------------------------!
+!   delta: angle between source and receiver
+  ! azep: azimuth at source (from south to receiver)
+! azst: phi to receiver with source at NP
   allocate(delta(nr),azst(nr),azep(nr))
+  allocate(delta1(nr),azst1(nr),azep1(nr))
   if(lats == 90.0_dp) lats = 89.98_dp
   do i = 1,nr
      call delaz(latr(i),lonr(i),lats,lons,delta(i),azep(i),azst(i)) 
+   !   call angles(latr(i),lonr(i),lats,lons,delta1(i),azep1(i),azst1(i))
   end do
   azep = twopi_d-azep
   azst = pi_d-azst
+!   azep1 = pi_d - azep1
+!    azst1 = pi_d - azst1
+  
+   ! do i = 1,nr
+   !    print *, ' receiver epicentral distances (deg): '
+   !    print *, delta(i)*180.0_dp/pi_d
+   !    print *, ' azep (deg): '
+   !    print *, azep(i)*180.0_dp/pi_d
+   !    print *, ' azst (deg): '
+   !    print *, azst(i)*180.0_dp/pi_d
+   ! end do
+   
 
   !--------------------------------------------------!
   !    compute the required spherical harmonics      !
@@ -298,7 +317,7 @@ program yspec
            !        toroidal modes          !
            !--------------------------------!
 
-           if(l > 1) then
+           if(l > 1000) then
            
               ! get the source vectors
               call source_vector_tor(l,w,is,rs,mm,svt)
@@ -329,8 +348,8 @@ program yspec
                        xc = msign*xca(l+1,abs(m)+1,k)
                     end if
                     ei = eia(k)**m                 
-                    ut(j,k) = ut(j,k) + ii*m*ww(m+3)*x*ei              
-                    up(j,k) = up(j,k) - ww(m+3)*xp*ei
+                  !   ut(j,k) = ut(j,k) + ii*m*ww(m+3)*x*ei              
+                  !   up(j,k) = up(j,k) - ww(m+3)*xp*ei
                  end do
               end do
               

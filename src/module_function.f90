@@ -322,7 +322,8 @@ module module_function
       real(dp), intent(out) :: delta,azep,azst
       
       ! parameters
-      real(dp), parameter :: geoco  = 0.993277_dp
+      ! real(dp), parameter :: geoco  = 0.993277_dp
+      real(dp), parameter :: geoco  = 1.0_dp
       real(dp), parameter :: hpi    = 0.5_dp*pi_d
       real(dp), parameter :: rad    = 0.0174533_dp
       real(dp), parameter :: reprad = 57.29578_dp
