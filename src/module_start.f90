@@ -68,7 +68,7 @@ contains
     end if
     if(is == nic) is = is-1
  
-
+   !  print *, 'is is: ', is
 
 
     return

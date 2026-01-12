@@ -865,7 +865,6 @@ module module_solver
       if(rr >= rs) then
 
          call sph_start_level(ll,real(omega),is,1,i1)
-         ! i1 = 1
          rt = r(i1)
          if(i1 == 1) rt = min(0.1_dp*dr,0.1_dp*r(2))
          if(i1 >= is) then

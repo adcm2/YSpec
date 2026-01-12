@@ -195,6 +195,7 @@ module module_model
       read(io,*) ians,tref
       tref=twopi_d/tref
       tref=tref/fre_norm
+      ! print *, ' Reference frequency for attenuation: ',tref
       if(ians == 1) then
          ifanis = .true.
       else
@@ -488,8 +489,6 @@ module module_model
       moment_norm=r_norm**5*rho_norm**2*grav_norm
       pot_norm = acl_norm*r_norm
       pibigg=pi_d*bigg/grav_norm
-      print *, 'Time normalization (s): ', t_norm
-      print *, 'Acceleration normalization (m/s^2): ', acl_norm
       return
     end subroutine set_parameters
 

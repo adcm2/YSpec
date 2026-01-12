@@ -5,10 +5,10 @@
   "./output/yspec.out"
 
 # Earth model
-  "./examples/prem_noocean_noattenuation.txt"
+  "./examples/prem.200.no.noatten.txt"
 
 # which type of modes to include
-2
+3
 
 # attenuation switch: 1 = on, 0 = off
 0
@@ -23,16 +23,16 @@
 0
  
 # lmin 
-  2
+  300
 
 # lmax
-  2
+  300
 
 # fmin (mHz) (this should always be greater than 0)
   0.1
 
 # fmax (mHz)
-  5.0
+  22.0
   
 #  length of  time series (min)
   500
@@ -44,49 +44,48 @@
   0.1
 
 # f12 filter (mHz) 
-  0.2
+  0.15
 
 # f21 filter (mHz) 
-  4.90
+  19.0
 
 # f22 filter (mHz) 
-  5.0
+  19.5
 
 # source depth (km)
   33.0
 
 # source latitude (deg)
-  0
+  89.0
 
 # source longitude (deg)
-  0
+  0.0
 
 # M_	{r,r} (Nm) 
-  -0.6e17
+  1.0e17
 
 # M_{r,theta} (Nm)
-  -1.85e17
+  0.0e17
 
 # M_{r,phi} (Nm)
-  0.12e17
+  0e17
 
 # M_{theta,theta} (Nm)
- -6.29e17
+  0e17
 
 # M_{theta,phi} (Nm)
-  -4.73e17
+  0e17
 
 # M_{phi,phi} (Nm)
-  6.89e17
+  0e17
 
 # receiver depth
   0.0
 
 # number of receivers
-2
+1
 
 # receiver latitudes and longitudes
  
-     0   45
-     0    06
+     -23.0 43.0
      

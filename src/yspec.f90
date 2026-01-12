@@ -6,10 +6,7 @@ program yspec
   ! Al-Attar & Woodhouse (2008).                                   !
   !================================================================!
 
-! CURRENT CHANGES:
-! added spectra output
-! switched off radial and spheroidal modes
-
+   ! CURRENT CHANGE: NO HANN FILTER ON SPECTRA BEFORE TRANSFORM !
   !================================================================!
   ! Modules used:                                                  !
   !================================================================!
@@ -40,7 +37,6 @@ program yspec
   !================================================================!  
   character(len=10) :: string                                      !
   character(len=256) :: pref_out                                   !
-  character(len=256) :: pref_w_out                                 !
   character(len=256) :: seis_out                                   !
   character(len=256) :: phi_coef_pref ='phi_coef.out'              !
   character(len=256) :: phi_coef_out                               !
@@ -48,14 +44,14 @@ program yspec
   integer(i4b) :: i,j,k,l,lmin,lmax, &                             !
        nw,ios,i1,i2,is,ir,nt,nr,nout,mex, &                        !
        qex,m,im,isv,msign,ats_in,grav_switch, &                    !
-       out_switch,cor_switch,phi_coef_switch, &                   !
-       mtype                                                       !
+       out_switch,cor_switch,phi_coef_switch, m_type               !
   real(dp) :: wmin,wmax,dw,rr,rs,ep,lons,lats, &                   !
        zeta,wt,dt,df,t,f11,f12,f21,f22,f,tout,depth_rec, &         !
        depth_source,sqzm2,sqzm6,sqz,f1,f2,x,xp,xc                  !
   real(dp), dimension(6) :: mm                                     !
   real(dp), dimension(:), allocatable :: latr,lonr,delta, &        !
-       azst,csc,azep                                               !
+       azst,csc,azep, delta1, azst1, azep1, &                      !
+       csc1                                                        !
   real(dp), dimension(:,:), allocatable :: xl0,xlp1,xlp2,xlp3      !
   real(dp), dimension(:,:,:), allocatable :: xa,xpa,xca            !
   complex(dpc) :: w,tmp1,tmp2,ei                                   !
@@ -103,7 +99,7 @@ program yspec
 
 
   ! read computational parameters
-  call read_int(io1,mtype,2)
+  call read_int(io1,m_type,2)
   call read_int(io1,ats_in,2)
   call read_int(io1,grav_switch,2)
   call read_int(io1,out_switch,2)
@@ -148,27 +144,30 @@ program yspec
   !--------------------------------------------------!
   !     compute epicentral angle and azimuths        !
   !--------------------------------------------------!
+!   delta: angle between source and receiver
+  ! azep: azimuth at source (from south to receiver)
+! azst: phi to receiver with source at NP
   allocate(delta(nr),azst(nr),azep(nr))
+  allocate(delta1(nr),azst1(nr),azep1(nr))
   if(lats == 90.0_dp) lats = 89.98_dp
   do i = 1,nr
      call delaz(latr(i),lonr(i),lats,lons,delta(i),azep(i),azst(i)) 
-   !   call angles(lats,lons,latr(i),lonr(i),delta(i),azep(i),azst(i))
+   !   call angles(latr(i),lonr(i),lats,lons,delta1(i),azep1(i),azst1(i))
   end do
   azep = twopi_d-azep
   azst = pi_d-azst
-!   print *, 'delta (deg): ', delta*180.0_dp/pi_d
-!   print *, 'azep (deg): ', azep*180.0_dp/pi_d
-!   print *, 'azst (deg): ', azst*180.0_dp/pi_d
-
-!   do i = 1,nr
-!      call delaz(latr(i),lonr(i),lats,lons,delta(i),azep(i),azst(i)) 
-!    !   call angles(lats,lons,latr(i),lonr(i),delta(i),azep(i),azst(i))
-!   end do
-!   azep = twopi_d-azep
-!   azst = pi_d-azst
-!   print *, 'delta (deg): ', delta*180.0_dp/pi_d
-!   print *, 'azep (deg): ', azep*180.0_dp/pi_d
-!   print *, 'azst (deg): ', azst*180.0_dp/pi_d
+!   azep1 = pi_d - azep1
+!    azst1 = pi_d - azst1
+  
+   ! do i = 1,nr
+   !    print *, ' receiver epicentral distances (deg): '
+   !    print *, delta(i)*180.0_dp/pi_d
+   !    print *, ' azep (deg): '
+   !    print *, azep(i)*180.0_dp/pi_d
+   !    print *, ' azst (deg): '
+   !    print *, azst(i)*180.0_dp/pi_d
+   ! end do
+   
 
   !--------------------------------------------------!
   !    compute the required spherical harmonics      !
@@ -209,10 +208,9 @@ program yspec
   f21=f21/1000.0_dp*t_norm
   f22=f22/1000.0_dp*t_norm
 
-  print *, 'frequencies: ', f11, f12, f21, f22
   ! set parameters for frequency spacing
   mex = 5
-  qex = 4
+  qex = 1
 
   ! get the frequency spacing
   call fcal(f1,f2,dt,tout,mex,qex,df,ep,nt,i1,i2)
@@ -220,7 +218,6 @@ program yspec
 
   ! set some more parameters
   dw = twopi_d*df
-  print *, ' frequency step (rad/s) = ', dw* 1000.0/(t_norm * twopi_d)
   if(i1 == i2) stop 'too few frequency steps'  
   wmin=(i1-1)*dw
   wmax=(i2-1)*dw
@@ -268,7 +265,6 @@ program yspec
 
   ! set the attenuation 
   call set_ats_switch(ats_in) 
-  write(6,*) 'ep = ', ep
 
 
   ! start loop over l
@@ -284,12 +280,12 @@ program yspec
  
         w=wmin+(j-1)*dw-ii*ep
 
-        if((l == 0) .and. ((mtype == 1) .or. (mtype == 4))) then
+        if(l == 0) then
 
            !-----------------------------------------!
            !               radial modes              !
            !-----------------------------------------!
-           ! RADIAL MODES SWITCHED OFF HERE!
+           
            !get the radial source vector
            call source_vector_rad(w,is,rs,mm,sr0)
 
@@ -316,12 +312,14 @@ program yspec
               ur(j,k) = ur(j,k) + uu(3)*xa(1,1,k)              
            end do
 
-        else if (l > 0) then     
+        else               
 
            !--------------------------------!
            !        toroidal modes          !
            !--------------------------------!
-           if(((mtype == 2) .or. (mtype == 4))) then
+
+         !   if(l > 1000) then
+           
               ! get the source vectors
               call source_vector_tor(l,w,is,rs,mm,svt)
               
@@ -355,14 +353,13 @@ program yspec
                     up(j,k) = up(j,k) - ww(m+3)*xp*ei
                  end do
               end do
-            end if
+              
+         !   end if
 
            !------------------------------!
            !        spheroidal modes      !
            !------------------------------!
-         !    Spheroidal MODES SWITCHED OFF HERE!
-
-         if((mtype == 3) .or. (mtype == 4)) then
+           
            ! get the spheroidal source vectors
            call source_vector_sph(l,w,is,rs,mm,svs)
 
@@ -440,7 +437,7 @@ program yspec
                  up(j,k)  = up(j,k)  + ii*m*vv(m+3)*xc*ei                     
               end do
            end do           
-         end if
+
         end if
      end do wloop
      ! end loop over frequency
@@ -449,47 +446,12 @@ program yspec
   ! end loop over l
 
 
-  !-------------------------------------------!
-  !       write out spectra to file           !
-  !-------------------------------------------!
-
-!   nout = nt
-!   do i = 1,nt
-!      t = (i-1)*dt
-!      if(t > tout) then
-!         nout = i
-!         exit
-!      end if
-!   end do
-   pref_w_out = trim(pref_out)//'_spectra'
-   do k = 1,nr
-
-     call string_cat_int(trim(pref_w_out)//'.',k,seis_out)
-     open(io3,file=trim(seis_out),form='formatted')
-
-     do i=1,nw
-         w=wmin+(i-1)*dw
-         w = w * 1000.0/(t_norm * twopi_d)
-         ! if (i == 1) then
-         !    print *, ' idx: ', i, ' freq (mHz): ', w
-         ! else if (i == nw) then
-         !    print *, ' idx: ', i, ' freq (mHz): ', w
-         ! end if
-         write(io3,110) real(w),real(ur(i,k)) * acl_norm,aimag(ur(i,k)) * acl_norm, & 
-             real(ut(i,k)) * acl_norm,aimag(ut(i,k)) * acl_norm, & 
-             real(up(i,k)) * acl_norm,aimag(up(i,k)) * acl_norm
-     end do
-     close(io3)
-
-   end do
-
   !------------------------------------------!
   !   perform inverse Fourier transform      !
   !------------------------------------------!
   call ifft(nt,i1,i2,df,f11,f12,f21,f22,dt,ur,ut,up)
   nt = size(ur,1)
   
-
   !--------------------------------------------!
   ! undo the eponential decay and unnormalize  !
   ! the time-series                            !
@@ -529,10 +491,6 @@ program yspec
         up(i,j) =  tmp1*sin(azep(j))+tmp2*cos(azep(j))
      end do
   end do
-  do j = 1,nr
-     print *, ' Receiver ', j, ' at (lat,lon) = (', & 
-          latr(j),',',lonr(j),')', ' azep = ', azep(j), ' azst = ', azst(j)
-  end do
 
   !-------------------------------------------!
   !      write out seismograms to file        !
@@ -563,7 +521,6 @@ program yspec
   end do
   
 100 format(5e15.6)
-110 format(7e15.6)
   
   !-----------------------------------------!
   !         deallocate the model            !
