@@ -195,6 +195,7 @@ module module_model
       read(io,*) ians,tref
       tref=twopi_d/tref
       tref=tref/fre_norm
+      ! print *, ' Reference frequency for attenuation: ',tref
       if(ians == 1) then
          ifanis = .true.
       else

@@ -6,6 +6,7 @@ program yspec
   ! Al-Attar & Woodhouse (2008).                                   !
   !================================================================!
 
+   ! CURRENT CHANGE: NO HANN FILTER ON SPECTRA BEFORE TRANSFORM !
   !================================================================!
   ! Modules used:                                                  !
   !================================================================!
@@ -317,7 +318,7 @@ program yspec
            !        toroidal modes          !
            !--------------------------------!
 
-           if(l > 1000) then
+         !   if(l > 1000) then
            
               ! get the source vectors
               call source_vector_tor(l,w,is,rs,mm,svt)
@@ -348,12 +349,12 @@ program yspec
                        xc = msign*xca(l+1,abs(m)+1,k)
                     end if
                     ei = eia(k)**m                 
-                  !   ut(j,k) = ut(j,k) + ii*m*ww(m+3)*x*ei              
-                  !   up(j,k) = up(j,k) - ww(m+3)*xp*ei
+                    ut(j,k) = ut(j,k) + ii*m*ww(m+3)*x*ei              
+                    up(j,k) = up(j,k) - ww(m+3)*xp*ei
                  end do
               end do
               
-           end if
+         !   end if
 
            !------------------------------!
            !        spheroidal modes      !

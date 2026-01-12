@@ -111,7 +111,7 @@ module module_fourier
             else if(w >= w4) then
                filt = 0.0_dp
             end if
-            data(:,i) = filt*data(:,i)
+            ! data(:,i) = filt*data(:,i)
          end do
       end if
 
