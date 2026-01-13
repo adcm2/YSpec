@@ -26,13 +26,13 @@
   0
 
 # lmax
-  750
+  3000
 
 # fmin (mHz) (this should always be greater than 0)
   0.1
 
 # fmax (mHz)
-  50.0
+  200.0
   
 #  length of  time series (min)
   200
@@ -41,16 +41,16 @@
   1.0	
 
 # f11 filter (mHz) 
-  0.1
+  5.0
 
 # f12 filter (mHz) 
-  0.15
+  10.0
 
 # f21 filter (mHz) 
-  48.90
+  83.3
 
 # f22 filter (mHz) 
-  49.0
+  100.0
 
 # source depth (km)
   33.0
