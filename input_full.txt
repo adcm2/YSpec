@@ -32,7 +32,7 @@
   0.1
 
 # fmax (mHz)
-  71.0
+  51.0
   
 #  length of  time series (min)
   200
@@ -41,16 +41,16 @@
   1.0	
 
 # f11 filter (mHz) 
-  5.0
+  0.1
 
 # f12 filter (mHz) 
-  10.0
+  0.2
 
 # f21 filter (mHz) 
-  68.0
+  48.0
 
 # f22 filter (mHz) 
-  70.0
+  50.0
 
 # source depth (km)
   33.0
