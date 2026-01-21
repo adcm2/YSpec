@@ -1158,7 +1158,7 @@ module module_int
       if(real(omega) == 0.0_dp) then
          dr = 1.0_dp/nw
       else
-         dr = nw*real(omega)/alpha(im)
+         dr = 2.0*nw*real(omega)/alpha(im)
          dr = 1.0_dp/dr
       end if
 
@@ -1217,13 +1217,13 @@ module module_int
       ! compute parameters
       cmu    = rmu*(1.0_dp+rqmu*lno)
       ckappa = rkappa*(1.0_dp+rqkappa*lno)
-      calpha = (ckappa+1.3333333333_dp*cmu)/rrho     
+      calpha = (ckappa+1.33333333333333_dp*cmu)/rrho     
       cbeta  = cmu/rrho
       sign   = 1.0_dp
       tmp1   = omega2/cbeta
-      tmp2   = omega2+5.3333333_dp*pibigg*rrho
+      tmp2   = omega2+5.33333333333333_dp*pibigg*rrho
       tmp2   = tmp2/calpha
-      tmp3   = 2.666666666_dp*pibigg*zeta*rrho
+      tmp3   = 2.666666666666666_dp*pibigg*zeta*rrho
       tmp3   = tmp3*tmp3/(calpha*cbeta)
 
       ! loop over first two solutions
@@ -1302,7 +1302,7 @@ module module_int
       
       ! compute some parameters
       ckappa = rkappa*(1.0_dp+rqkappa*lno)
-      calpha = (ckappa+1.3333333333_dp*cmu)/rrho     
+      calpha = (ckappa+1.33333333333333_dp*cmu)/rrho     
       cbeta  = cmu/rrho
       
       ! first solution

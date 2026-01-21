@@ -3,7 +3,7 @@ module module_start
   use nrtype
   implicit none
   
-  real(dp), parameter :: tol_start = 11
+  real(dp), parameter :: tol_start = 12
 
   
 contains
@@ -168,6 +168,7 @@ contains
        ! the starting point has been found
        if(sum > tol_start) then
           is = i-1
+          print *, 'start_level: l=',l,' w=',w/twopi_d,' is=',is, 'r(is)=',r(is)
           exit
        end if
     end do
