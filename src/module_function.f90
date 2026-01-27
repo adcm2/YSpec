@@ -325,8 +325,8 @@ module module_function
       ! real(dp), parameter :: geoco  = 0.993277_dp
       real(dp), parameter :: geoco  = 1.0_dp
       real(dp), parameter :: hpi    = 0.5_dp*pi_d
-      real(dp), parameter :: rad    = 0.0174533_dp
-      real(dp), parameter :: reprad = 57.29578_dp
+      real(dp), parameter :: rad    = 0.01745329251_dp
+      real(dp), parameter :: reprad = 57.2957795131_dp
       
       ! local variables
       real(dp) :: el,stl,elon,slon,as,bs,cs,ds,a,b,c,d, & 

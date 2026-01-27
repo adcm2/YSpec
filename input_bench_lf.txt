@@ -2,7 +2,7 @@
 # program yspec
 
 # prefix for output files
-  "./output/yspec.out.hf"
+  "./output/yspec.out"
 
 # Earth model
   "./examples/prem.200.no.noatten.txt"
@@ -26,19 +26,19 @@
   0
 
 # lmax
-  750
+  75
 
 # fmin (mHz) (this should always be greater than 0)
   0.1
 
 # fmax (mHz)
-  52.0
+  7.0
   
 #  length of  time series (min)
   500
 
 # time step (sec) 
-  1.0
+  1.0	
 
 # f11 filter (mHz) 
   0.1
@@ -47,10 +47,10 @@
   0.12
 
 # f21 filter (mHz) 
-  50.0
+  5.0
 
 # f22 filter (mHz) 
-  50.1
+  5.1
 
 # source depth (km)
   33.0
