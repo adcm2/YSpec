@@ -17,7 +17,7 @@
 2
 
 # output: 0 = displacement, 1 = velocity, 2 = acceleration
-2
+1
 
 # potential and tilt corrections: 0 = no, 1 = yes 
 0
