@@ -17,7 +17,7 @@
 2
 
 # output: 0 = displacement, 1 = velocity, 2 = acceleration
-1
+0
 
 # potential and tilt corrections: 0 = no, 1 = yes 
 0
@@ -35,7 +35,7 @@
   21.0
   
 #  length of  time series (min)
-  300
+  500
 
 # time step (sec) 
   1.0

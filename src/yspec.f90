@@ -309,7 +309,7 @@ program yspec
 
            ! sum the spherical harmonic series
            do k = 1,nr
-              ur(j,k) = ur(j,k) + uu(3)*xa(1,1,k)              
+            !   ur(j,k) = ur(j,k) + uu(3)*xa(1,1,k)              
            end do
 
         else               
@@ -349,7 +349,7 @@ program yspec
                        xc = msign*xca(l+1,abs(m)+1,k)
                     end if
                     ei = eia(k)**m                 
-                    ut(j,k) = ut(j,k) + ii*m*ww(m+3)*x*ei              
+                    ut(j,k) = ut(j,k) + ii*m*ww(m+3)*xc*ei              
                     up(j,k) = up(j,k) - ww(m+3)*xp*ei
                  end do
               end do
@@ -432,9 +432,9 @@ program yspec
                     xc = msign*xca(l+1,abs(m)+1,k)
                  end if
                  ei = eia(k)**m                            
-                 ur(j,k)  = ur(j,k)  + uu(m+3)*x*ei
-                 ut(j,k)  = ut(j,k)  + vv(m+3)*xp*ei              
-                 up(j,k)  = up(j,k)  + ii*m*vv(m+3)*xc*ei                     
+               !   ur(j,k)  = ur(j,k)  + uu(m+3)*x*ei
+               !   ut(j,k)  = ut(j,k)  + vv(m+3)*xp*ei              
+               !   up(j,k)  = up(j,k)  + ii*m*vv(m+3)*xc*ei                     
               end do
            end do           
 
@@ -483,12 +483,18 @@ program yspec
   ! rotate acceleration vector into geographic Up, North,    !
   ! East, co-ordinate system                                 !
   !----------------------------------------------------------!
+!   do j = 1,nr
+!   print *, ' azep for receiver ', j, ' : ', azep(j)*180.0_dp/pi_d
+!       print *, 'cos/sin azep for receiver ', j, ' : ', cos(azep(j)), sin(azep(j))
+!   end do
   do i = 1,nt
      do  j = 1,nr
         tmp1 = ut(i,j) 
         tmp2 = up(i,j) 
         ut(i,j) = -tmp1*cos(azep(j))+tmp2*sin(azep(j))
         up(i,j) =  tmp1*sin(azep(j))+tmp2*cos(azep(j))
+      !   ut(i,j) = tmp2
+      !   up(i,j) = tmp1
      end do
   end do
 
