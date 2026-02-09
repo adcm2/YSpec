@@ -2,7 +2,7 @@
 # program yspec
 
 # prefix for output files
-  "./output/yspec.out"
+  "./output/yspec.lf.out"
 
 # Earth model
   "./examples/prem.200.no.noatten.txt"
@@ -44,7 +44,7 @@
   0.1
 
 # f12 filter (mHz) 
-  0.12
+  0.2
 
 # f21 filter (mHz) 
   5.0

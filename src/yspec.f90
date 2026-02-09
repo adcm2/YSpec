@@ -210,7 +210,7 @@ program yspec
 
   ! set parameters for frequency spacing
   mex = 5
-  qex = 1
+  qex = 4
 
   ! get the frequency spacing
   call fcal(f1,f2,dt,tout,mex,qex,df,ep,nt,i1,i2)
