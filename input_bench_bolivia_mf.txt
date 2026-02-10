@@ -2,7 +2,7 @@
 # program yspec
 
 # prefix for output files
-  "./output/yspec.out.bolivia.mf"
+  "./output/yspec.out.mf"
 
 # Earth model
   "./examples/prem.200.no.noatten.txt"
