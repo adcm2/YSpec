@@ -47,10 +47,10 @@
   0.2
 
 # f21 filter (mHz) 
-  5.0
+  4.9
 
 # f22 filter (mHz) 
-  5.1
+  5.0
 
 # source depth (km)
   33.0
