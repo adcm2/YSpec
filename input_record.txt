@@ -5,7 +5,7 @@
   "./output/yspec.out"
 
 # Earth model
-  "./examples/prem.200.no.txt"
+  "./examples/prem.200.noiso"
 
 # which type of modes to include
 4 
@@ -53,7 +53,7 @@
   49.0
 
 # source depth (km)
-  100.0
+  647.1
 
 # source latitude (deg)
   0.0
@@ -83,10 +83,10 @@
   0.0
 
 # number of receivers
-90
+91
 
 # receiver latitudes and longitudes
- 
+     0.0  0.0
      0.0  2.0
      0.0  4.0
      0.0  6.0
