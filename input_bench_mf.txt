@@ -32,7 +32,7 @@
   0.1
 
 # fmax (mHz)
-  51.0
+  60.0
   
 #  length of  time series (min)
   120
