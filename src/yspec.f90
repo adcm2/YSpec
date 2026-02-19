@@ -309,7 +309,7 @@ program yspec
 
            ! sum the spherical harmonic series
            do k = 1,nr
-            !   ur(j,k) = ur(j,k) + uu(3)*xa(1,1,k)              
+              ur(j,k) = ur(j,k) + uu(3)*xa(1,1,k)              
            end do
 
         else               

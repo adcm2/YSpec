@@ -2,7 +2,7 @@
 # program yspec
 
 # prefix for output files
-  "./output/yspec.out.mf"
+  "./output/yspec.out.bolivia.mf"
 
 # Earth model
   "./examples/prem.200.no.noatten.txt"
@@ -87,6 +87,6 @@
 
 # receiver latitudes and longitudes
  
-     51.6807   103.6438
+     80.0 0.0
      0    06
      

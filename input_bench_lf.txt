@@ -87,5 +87,5 @@
 
 # receiver latitudes and longitudes
  
-     51.6807   103.6438
+     80   0
      0    06
