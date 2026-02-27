@@ -313,7 +313,7 @@ module module_function
 
 
 
-    
+   !  stlong is source longitude, stlati is source latitude, eplong is receiver longitude, eplati is receiver latitude
     subroutine delaz(eplati,eplong,stlati,stlong,delta,azep,azst)
       use nrtype
       implicit none

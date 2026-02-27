@@ -156,17 +156,7 @@ program yspec
   end do
   azep = twopi_d-azep
   azst = pi_d-azst
-!   azep1 = pi_d - azep1
-!    azst1 = pi_d - azst1
-  
-   ! do i = 1,nr
-   !    print *, ' receiver epicentral distances (deg): '
-   !    print *, delta(i)*180.0_dp/pi_d
-   !    print *, ' azep (deg): '
-   !    print *, azep(i)*180.0_dp/pi_d
-   !    print *, ' azst (deg): '
-   !    print *, azst(i)*180.0_dp/pi_d
-   ! end do
+
    
 
   !--------------------------------------------------!
