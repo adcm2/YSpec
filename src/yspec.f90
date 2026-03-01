@@ -156,7 +156,12 @@ program yspec
   end do
   azep = twopi_d-azep
   azst = pi_d-azst
-
+  do i = 1,nr
+     print *, "delt(i): ", delta(i)
+     print *, "azep(i): ", azep(i)
+     print *, "azst(i): ", azst(i)
+     print *, " "
+  end do
    
 
   !--------------------------------------------------!
@@ -200,7 +205,7 @@ program yspec
 
   ! set parameters for frequency spacing
   mex = 5
-  qex = 4
+  qex = 1
 
   ! get the frequency spacing
   call fcal(f1,f2,dt,tout,mex,qex,df,ep,nt,i1,i2)
@@ -339,8 +344,8 @@ program yspec
                        xc = msign*xca(l+1,abs(m)+1,k)
                     end if
                     ei = eia(k)**m                 
-                    ut(j,k) = ut(j,k) + ii*m*ww(m+3)*xc*ei              
-                    up(j,k) = up(j,k) - ww(m+3)*xp*ei
+                  !   ut(j,k) = ut(j,k) + ii*m*ww(m+3)*xc*ei              
+                  !   up(j,k) = up(j,k) - ww(m+3)*xp*ei
                  end do
               end do
               
@@ -422,9 +427,9 @@ program yspec
                     xc = msign*xca(l+1,abs(m)+1,k)
                  end if
                  ei = eia(k)**m                            
-                 ur(j,k)  = ur(j,k)  + uu(m+3)*x*ei
-                 ut(j,k)  = ut(j,k)  + vv(m+3)*xp*ei              
-                 up(j,k)  = up(j,k)  + ii*m*vv(m+3)*xc*ei                     
+               !   ur(j,k)  = ur(j,k)  + uu(m+3)*x*ei
+               !   ut(j,k)  = ut(j,k)  + vv(m+3)*xp*ei              
+               !   up(j,k)  = up(j,k)  + ii*m*vv(m+3)*xc*ei                     
               end do
            end do           
 

@@ -375,11 +375,14 @@ module module_function
       caze = (as-a*cdel)/(sdel*b)
       if(abs(caze) > 1.0_dp) caze = sign(1.0_dp,caze)
       aze = acos(caze)
-
+      print *, "caze: ", caze
+      print *, "aze: ", aze
       if(bs > 0.0_dp) cazs = (a-as*cdel)/(bs*sdel)
       if(bs == 0.0_dp) cazs = sign(1.0_dp,cazs)
       if(abs(cazs) > 1.0_dp) cazs = sign(1.0_dp,cazs)
       azs = acos(cazs)
+      print *, "cazs: ", cazs
+      print *, "azs: ", azs
       dif = ds*c-cs*d
       if(dif < 0.0_dp) aze = twopi_d-aze
       azep = aze
