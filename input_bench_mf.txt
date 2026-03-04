@@ -8,7 +8,7 @@
   "./examples/prem.200.no.txt"
 
 # which type of modes to include
-1
+4
 
 # attenuation switch: 1 = on, 0 = off
 1
